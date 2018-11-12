@@ -24,6 +24,41 @@
     });
 
 
+    function getwikiimage(place) {
+        var URL = 'https://uk.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&origin=*&titles=';
+        if (place === 'Земля' || place === 'Сонце')
+            URL += place;
+        else
+            URL += place + ' (планета)';
+        $.getJSON(URL, function (data) {
+            var obj = data.query.pages;
+            var ob = Object.keys(obj)[0];
+            console.log(obj[ob]["original"].source);
+            try {
+                // if (place === 'Сонце')
+                //     $('#tPlanet').html('Інформація про зорю ' + place);
+                // else
+                //     $('#tPlanet').html('Інформація про планету ' + place);
+                // $('#wikiText').html(obj[ob]["extract"]);
+                // $('#wikiText').append('<br> Детальніше - у <a href="https://uk.wikipedia.org/wiki/' + place + '" target="_blank">Вікіпедії</a> (посилання - <b>в навігаційному рядку<b>)')
+                // var newPlace="";
+                // if (place === 'Земля' || place === 'Сонце')
+                //     newPlace = place;
+                // else
+                //     newPlace = place + ' (планета)';
+                // $('#navDetails').attr("href", "https://uk.wikipedia.org/wiki/" + newPlace);
+                // $('#navDetails').html("Про "+place+" в Вікіпедії");
+                $("#planetImage").attr("src",obj[ob]["original"].source);
+            }
+            catch (err) {
+                // $('#wikiText').html('На жаль, сталась невідома помилка, й нам не вдалось отримати дані з Вікіпедії, однак Ви можете спробувати знайти інформацію про планету <a href="https://uk.wikipedia.org/wiki/' + place + '" target="_blank" style="z-index:-9999;">самотужки</a>');
+                //https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Gas_giants_in_the_solar_system.jpg/465px-Gas_giants_in_the_solar_system.jpg
+                $("#planetImage").attr("src","https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Gas_giants_in_the_solar_system.jpg/465px-Gas_giants_in_the_solar_system.jpg");
+            }
+        });
+    }
+
+
     function dowiki(place) {
         var URL = 'https://uk.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&origin=*&titles=';
         if (place === 'Земля' || place === 'Сонце')
@@ -48,6 +83,7 @@
                     newPlace = place + ' (планета)';
                 $('#navDetails').attr("href", "https://uk.wikipedia.org/wiki/" + newPlace);
                 $('#navDetails').html("Про "+place+" в Вікіпедії");
+                getwikiimage(place);
             }
             catch (err) {
                 $('#wikiText').html('На жаль, сталась невідома помилка, й нам не вдалось отримати дані з Вікіпедії, однак Ви можете спробувати знайти інформацію про планету <a href="https://uk.wikipedia.org/wiki/' + place + '" target="_blank" style="z-index:-9999;">самотужки</a>');

@@ -69,7 +69,9 @@ body {
 
 #solar-system {
     position: absolute;
-    width: 100%;
+    left: 10rem;
+    right: 2rem;
+    width: 60%;
     height: 100%;
     transform-style: preserve-3d;
 }
@@ -1427,7 +1429,7 @@ h1 {
         color: rgba(255, 255, 255, 0.5);
     }
 
-}
+
 
 #navbar, #controls, #data {
     background: rgba(0, 0, 0, 0.4);
@@ -1669,7 +1671,7 @@ body {
 #planetInfo {
     width: 35rem;
     margin-top: .6rem;
-    height: 44rem;
+    height: 49rem;
 }
 
 /* --------------------------------------------------------------------------- responsive styles */
